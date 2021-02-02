@@ -1,0 +1,28 @@
+{% extends 'layout.njk'%}
+{% import 'parts/card.njk' as cards %}
+
+{% block style%}
+   <link rel="stylesheet" href="/styles/user.css">
+{% endblock style%}
+
+{% block content%}
+
+   {% call cards.render('', 'order-error container')%}
+   <div class="error-lottie"></div>
+   <h2>Desculpe</h2>
+   <p>Não podemos procesar seu pedido</p>
+   <a href="/products/search" onclick='history.back()'>Tente novamente</a>
+   {% endcall %}
+
+   <script src="/lottie.min.js"></script>
+   <script>
+      const element = document.querySelector('.error-lottie')
+      lottie.loadAnimation({
+	 container: element,
+	 renderer: 'svg',
+	 loop: false,
+	 autoplay: true,
+	 path: '/lottie/4970-unapproved-cross.json'
+      });
+   </script>
+{% endblock content%}
