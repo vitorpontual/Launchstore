@@ -132,3 +132,19 @@
 .cart .button.order:hover{
    background: rgb(0,233,70)
 }
+
+/* Carrinho Vazio */
+
+.cart-empty {
+   text-align: center;
+}
+
+.cart-empty p {
+   font-size: 18px;
+
+}
+
+.cart-empty .button {
+   width: 240px;
+   margin: 16px auto;
+}

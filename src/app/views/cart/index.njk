@@ -4,6 +4,13 @@
 
 {% block content %}
 
+   {% if (cart.items) and (cart.items.length < 1)%}
+      {% call card.render('', 'cart-empty container')%}
+      <p>Seu carrinho está vazio</p>
+      <a href="/products/search" class=button>Compre Agora</a>
+      {%endcall%}
+   {%else%}
+
    {% call card.render('Carrinho', 'cart container')%}
       <div class="header">
 	 <p>Produto</p>
@@ -52,4 +59,5 @@
 	 </form>
       </div>
    {% endcall%}
+   {%endif%}
 {% endblock content%}

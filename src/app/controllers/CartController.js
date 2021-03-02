@@ -51,5 +51,22 @@ module.exports = {
       }catch(err){
 	 console.error(err)
       }
+   },
+   async delete(request, response){
+      try{
+	 let { id } = request.params
+
+	 let { cart } = request.session
+
+	 if(!cart){
+	    return response.redirect('/cart')
+	 }
+
+	 request.session.cart = Cart.init(cart).delete(id)
+
+	 return response.redirect('/cart')
+      }catch(err){
+	 console.error(err)
+      }
    }
 }
