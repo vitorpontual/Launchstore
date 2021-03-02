@@ -16,7 +16,7 @@
 	 <div class="item">
 	    <a href="/products/{{item.product.id}}">
 	       <img src="{{item.product.img}}" alt="Imagem do Produto {{item.product.name}}">
-	       <span class="title">{{item.product.nae}}</span>
+	       <span class="title">{{item.product.name}}</span>
 	    </a>
 
 	    <span class="price">{{item.formattedPrice}}</span>
@@ -46,7 +46,7 @@
 	 <span>{{cart.total.formattedPrice}}</span>
       </div>
 
-      <div class="action"><a href="/products/search" class='button shop'>Continuar comprando</a>
+      <div class="actions"><a href="/products/search" class='button shop'>Continuar comprando</a>
 	 <form action="/orders">
 	    <button class='button order'>Realizar pedido</button>
 	 </form>
