@@ -29,9 +29,27 @@ module.exports = {
 
 	 return response.redirect('/cart')
       }catch(err){
-	 return response.render('cart/index', {
-	    error: "Error ao adicionar um produto"
-	 })
+	 console.error(err)
+      }
+   },
+   async removeOne(request, response){
+      try{
+
+	 let{ id } = request.params
+
+	 let { cart } = request.session
+
+	 if(!cart){
+	    return response.redirect("/cart")
+	 }
+
+	 request.session.cart = Cart.init(cart).removeOne(id)
+
+	 return response.redirect('/cart')
+
+	 
+      }catch(err){
+	 console.error(err)
       }
    }
 }
