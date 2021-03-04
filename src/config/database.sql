@@ -20,7 +20,6 @@ CREATE TABLE "categories" (
   "name" text NOT NULL
 );
 
-
 CREATE TABLE "files" (
   "id" SERIAL PRIMARY KEY,
   "name" text,
@@ -40,6 +39,18 @@ CREATE TABLE "users" (
   "updated_at" timestamp DEFAULT 'now()'
 );
 
+CREATE TABLE "orders"(
+  "id" SERIAL PRIMARY KEY,
+  "seller_id" int NOT NULL,
+  "buyer_id" int NOT NULL,
+  "product_id" int NOT NULL,
+  "price" int NOT NULL,
+  "quantity" int DEFAULT 0,
+  "total" int NOT NULL,
+  "status" text NOT NULL,
+  "created_at" timestamp DEFAULT (now()),
+  "updated_at" timestamp DEFAULT (now())
+ );
 
 -- categories items 
 INSERT INTO categories(name) VALUES ('comida');
@@ -54,6 +65,12 @@ ALTER TABLE "files" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
 
 ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
+ALTER TABLE "orders" ADD FOREIGN KEY ("seller_id") REFERENCES "users" ("id");
+
+ALTER TABLE "orders" ADD FOREIGN KEY ("buyer_id") REFERENCES "users" ("id");
+
+ALTER TABLE "orders" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
+
 -- create procedure
 
 CREATE FUNCTION trigger_set_timestamp()
@@ -62,7 +79,7 @@ BEGIN
 	NEW.updated_at = NOW();
 	RETURN NEW;
 END
-$$ LANGUAGE plpqsql;
+$$ LANGUAGE plpgsql;
 
 -- auto updated_at products 
 CREATE TRIGGER set_timestamp
@@ -74,6 +91,12 @@ EXECUTE PROCEDURE trigger_set_timestamp();
 CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON users
 FOR EACH ROW 
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+-- auto updated_at orders
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON orders
+FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
 -- connect-pg-simple table
