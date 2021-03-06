@@ -3,8 +3,9 @@ const routes = express.Router()
 
 const OrderController = require('../app/controllers/OrderController')
 
-const { onlyUser } = require('../app/middleware/session')
+const { onlyUsers } = require('../app/middleware/session')
 
-routes.post('/', OrderController.post)
+routes.get('/', onlyUsers, OrderController.index)
+routes.post('/', onlyUsers, OrderController.post)
 
 module.exports = routes
