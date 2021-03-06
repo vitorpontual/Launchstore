@@ -9,14 +9,14 @@
 	 <a href="/product/search" class='button'>Compre Agora</a>
       {% endcall%}
    {%else%}
-      {% call card.render("Meus Pedidos", 'cart container')%}
+      {% call card.render("Meus Pedidos", 'orders container')%}
       <div class="items">
 	 {% for order in orders %}
 	    <div class="item-container">
 	       <div class="item">
 		  <img src="{{order.product.img}}" alt="Imagem do Produto {{order.product.name}}">		  
 		  <div>
-		     <div class='title'>{{order.proudct.name}}</div>
+		     <div class='title'>{{order.product.name}}</div>
 		     <div class='price'>{{order.formattedPrice}}</div>
 		     <div class='updated-at'>{{order.formattedUpdatedAt}}</div>
 		  </div>
@@ -29,7 +29,7 @@
 		  {{order.formattedTotal}}
 	       </div>
 
-	       <div class="status">
+	       <div class="status {{order.status}}">
 		  {{order.formattedStatus}}
 	       </div>
 	    </div>

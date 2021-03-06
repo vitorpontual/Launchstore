@@ -1,4 +1,4 @@
-const LoadProductService = require('../services/LoadProductService')
+   const LoadProductService = require('../services/LoadProductService')
 const User = require('../models/User')
 const Order = require('../models/Order')
 
@@ -36,7 +36,7 @@ module.exports = {
 	 order.buyer = await User.findOne({where: {id: order.buyer_id}})
 	 order.seller = await User.findOne({where: {id: order.seller_id}})
 	 order.formattedPrice = formatPrice(order.price)
-	 order.formattedPrice = formatPrice(order.total)
+	 order.formattedTotal = formatPrice(order.total)
 
 	 const statuses = {
 	    open: 'Aberto',
