@@ -39,6 +39,17 @@ module.exports = {
 
       return res.render('orders/sales', {sales})
    },
+   async show(req, res){
+      try{
+	 const order = await LoadOrderService.load('order', {
+	    where: {id: req.params.id}
+	 })
+
+	 return res.render('orders/detail', {order})
+      }catch(err){
+	 console.error(err)
+      }
+   },
    async post(req, res){
       try{
 	 const cart = Cart.init(req.session.cart)
