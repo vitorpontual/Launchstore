@@ -19,10 +19,12 @@ async function format(order){
    canceled: 'Cancelado'
    }
 
+   console.log(order)
+
    order.formattedStatus = statuses[order.status]
    const updatedAt = date(order.updated_at)
 
-   order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hour}:${updatedAt.minutes}`
+   order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hour}h${updatedAt.minutes}`
 
    return order
 }

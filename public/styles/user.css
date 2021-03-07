@@ -61,7 +61,7 @@ form .item select {
 
 
    position: relative;
-   z-index: 100;
+   z-index: 3;
 }
 
 
@@ -202,14 +202,12 @@ form .item span input[type='radio']{
 /* VALIDATE ERRORS */
 
 .input .error{
-   position: fixed;
-   top: 290px;
    z-index: 1;
    background-color: #e74c3c;
    padding: 4px;
    border-radius: 4px;
    color: white;
-   width: 270px;
+   max-width: 202px;
    text-align: center;
 
    animation: emailmessage 400ms 5s ease-out forwards;
@@ -218,7 +216,7 @@ form .item span input[type='radio']{
 
 @keyframes emailmessage {
    to {
-      top: 260px;
+      transform: translate(0, -29px)
    }
 }
 

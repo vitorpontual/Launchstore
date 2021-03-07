@@ -37,6 +37,7 @@ module.exports = {
       const sales = await LoadOrderService.load('orders', {
       where: {seller_id: req.session.userId}})
 
+      console.log(sales)
       return res.render('orders/sales', {sales})
    },
    async show(req, res){
@@ -110,5 +111,37 @@ module.exports = {
       }catch(err){
 	 console.error(err)
       }
+   },
+   async update(req, res){
+      try{
+	 const { id, action } = req.params
+
+	 const acceptedActions =  [
+	    'close', 'cancel'
+	 ]
+	 if(!acceptedActions.includes(action)) return res.send("Can't do this action")
+	 const order = await Order.findOne({where: {id}})
+
+	 if(!order) return res.send('order not found')
+
+	 if(order.status != 'open') return res.send("Can't do this action")
+
+	 const statuses = {
+	    close: "sold",
+	    cancel: "canceled"
+	 }
+
+	 order.status = statuses[action]
+
+	 await Order.update(id, {
+	    status: order.status
+	 })
+
+	 return res.redirect('/orders/sales')
+
+      }catch(err){
+	 console.error(err)
+      }
    }
+
 }

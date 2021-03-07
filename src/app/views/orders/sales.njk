@@ -3,7 +3,7 @@
 {% import "parts/card.njk" as card %}
 
 {% block content %}
-   {% if(orders.length < 1)%}
+   {% if(sales.length < 1)%}
       {% call card.render('', 'cart-empty container')%}
 	 <p>Nenhum Venda</p>
 	 <a href="/ads/create" class='button'>Comece a Vender</a>
