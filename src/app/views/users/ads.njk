@@ -9,6 +9,12 @@
 
 {% block content%}
 
+   {% if(products.length < 1)%}
+      {% call cards.render('', 'cart-empty container')%}
+	 <p>Nenhum Produto a Venda</p>
+	 <a href="/ads/create" class='button'>Comece a Vender</a>
+      {% endcall%}
+   {%else%}
    {% call cards.render('Meus Anúncios', 'users-ads container')%}
       <div class="items">
 	 {% for product in products %}
@@ -33,4 +39,5 @@
 	 {%endfor%}
       </div>
    {% endcall %}
+   {%endif%}
 {% endblock content%}

@@ -125,3 +125,18 @@ DROP CONSTRAINT files_product_id_fkey,
 ADD CONSTRAINT files_product_id_fkey 
 FOREIGN KEY ("product_id") REFERENCES "products" ("id")
 ON DELETE CASCADE;
+
+-- SOFT DELETE
+ALTER TABLE products ADD COLUMN "deleted_at" timestamp;
+
+CREATE OR REPLACE RUlE delete_product AS
+ON DELETE TO products DO INSTEAD
+UPDATE products
+SET deleted_at = now()
+WHERE products.id = old.id;
+
+CREATE VIEW products_without_deleted AS
+SELECT * FROM products WHERE deleted_at IS NULL;
+
+ALTER TABLE products RENAME TO product_with_deleted;
+ALTER VIEW products_without_deleted RENAME TO products;

@@ -36,8 +36,8 @@ module.exports = {
    async sales(req, res){
       const sales = await LoadOrderService.load('orders', {
       where: {seller_id: req.session.userId}})
+      console.log(sales.product)
 
-      console.log(sales)
       return res.render('orders/sales', {sales})
    },
    async show(req, res){
