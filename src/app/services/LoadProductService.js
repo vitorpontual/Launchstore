@@ -7,9 +7,11 @@ async function getImages(productId){
       ...file,
       src: `${file.path.replace('public', '')}`
    }))
+
    return files
 
 }
+
 
 async function format(product){
    const files = await getImages(product.id)
@@ -55,7 +57,8 @@ const LoadService = {
    async productWithDeleted(){
       try{
 	 let product = await Product.findOneWithDeleted(this.filter)
-	 return format(product)
+
+    return format(product)
       }catch(err){
 	 console.error(err)
       }

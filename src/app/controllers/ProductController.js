@@ -5,9 +5,6 @@ const Product = require('../models/Product.js')
 const File = require('../models/File.js')
 const LoadProductService = require('../services/LoadProductService')
 
-const { formatPrice, date } = require('../../lib/utils.js')
-
-
 module.exports = {
    async create(req, res) {
       try{
